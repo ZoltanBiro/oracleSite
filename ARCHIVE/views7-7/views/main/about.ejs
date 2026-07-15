@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoltan Biro — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--
+  NOTE: this is a standalone preview page. To drop into the existing
+  architecture, everything inside <main class="file"> below is the
+  content for views/about.ejs (rendered with layout: 'layouts/main-layout'),
+  and the font <link> + CSS should merge into public/main/css/style.css.
+-->
+
+<main class="file">
+
+  <div class="tab">
+    <span class="tab-label">SUBJECT FILE</span>
+    <span class="stamp">STATUS: STILL LEARNING</span>
+  </div>
+
+  <header class="file-header">
+    <h1>Zoltan Biro</h1>
+    <p class="role">Compliance &amp; Risk — Cybersecurity</p>
+  </header>
+
+  <section class="memo">
+    <p class="memo-lead">
+      I do compliance and risk for a living, which is one of the least fun sentences
+      a person can say at a party — and yet somehow I chose this on purpose.
+    </p>
+    <p>
+      What actually got me here: I care less about any one framework or checklist and
+      more about the bigger picture — how security and risk actually show up inside a
+      company, where the incentives get weird, and why the "correct" answer on paper
+      doesn't always survive contact with an actual organization. Compliance is the
+      day-to-day, but the part I find genuinely interesting is watching how risk
+      decisions ripple through a business, not just whether a control box got checked.
+    </p>
+    <p>
+      I'm still early in this career, so treat my opinions accordingly — I'm in
+      "collecting observations" mode more than "hot take" mode. This site is partly a
+      record of that. The <a href="/labs">Labs section</a> is where I go break things
+      and learn stuff outside the day job, mostly because staying technical still
+      matters to me even in a role pulled more toward policy and process.
+    </p>
+  </section>
+
+  <section class="register" aria-labelledby="register-heading">
+    <div class="register-head">
+      <h2 id="register-heading">Risk Register — Subject Assessment</h2>
+      <span class="register-ref">REF: ZB-001</span>
+    </div>
+
+    <table class="register-table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Observation</th>
+          <th scope="col">Likelihood</th>
+          <th scope="col">Impact</th>
+          <th scope="col">Mitigation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="#">01</td>
+          <td data-label="Observation">Will explain the difference between a control and a control objective, unprompted</td>
+          <td data-label="Likelihood"><span class="pill pill-high">High</span></td>
+          <td data-label="Impact"><span class="pill pill-low">Low</span></td>
+          <td data-label="Mitigation">Buy him a drink, change the subject</td>
+        </tr>
+        <tr>
+          <td data-label="#">02</td>
+          <td data-label="Observation">Side projects deployed without anything resembling a change management process</td>
+          <td data-label="Likelihood"><span class="pill pill-med">Medium</span></td>
+          <td data-label="Impact"><span class="pill pill-med">Medium</span></td>
+          <td data-label="Mitigation">See Labs section for evidence</td>
+        </tr>
+        <tr>
+          <td data-label="#">03</td>
+          <td data-label="Observation">Opinions on frameworks still under active formation</td>
+          <td data-label="Likelihood"><span class="pill pill-high">High</span></td>
+          <td data-label="Impact"><span class="pill pill-low">Low</span></td>
+          <td data-label="Mitigation">Ask again in five years</td>
+        </tr>
+        <tr>
+          <td data-label="#">04</td>
+          <td data-label="Observation">Genuinely enjoys reading policy documents</td>
+          <td data-label="Likelihood"><span class="pill pill-low">Low relatability</span></td>
+          <td data-label="Impact"><span class="pill pill-na">N/A</span></td>
+          <td data-label="Mitigation">Bring it up anyway, he'll talk for a while</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="file-footer">
+    <p class="filed-under">
+      Filed under: B.Sc. Computer Science — Computer &amp; Internet Security stream.
+      Full record in <a href="/resume">Resume</a>.
+    </p>
+    <p class="cta">
+      Open to talking risk, compliance, or arguing about whether a framework actually
+      works the way it's supposed to.
+    </p>
+    <ul class="contact-links">
+      <li><a href="mailto:you@zoltanbiro.ca">Email</a></li>
+      <li><a href="https://linkedin.com/in/yourhandle">LinkedIn</a></li>
+      <li><a href="https://github.com/yourhandle">GitHub</a></li>
+    </ul>
+  </footer>
+
+</main>
+
+</body>
+</html>

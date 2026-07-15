@@ -1,0 +1,25 @@
+<div class="spec-line">Selected Work</div>
+<h1>Things I <span>built</span></h1>
+<p class="lede">
+Projects are a really good way to stay sharp, so I did them. To stay even sharper, you can write about them. The following are some projects that had enough meat I could (and wanted) to write about. Most projects will live here <a href="/labs">Labs</a>, hopefully hosted - but probably a little rough. Click a project for my write-up.
+</p>
+
+<div class="project-grid">
+  <% projects.forEach(function(project) { %>
+    <a class="panel" href="/project/<%= project.slug %>">
+      <span class="focus tl"></span><span class="focus tr"></span>
+      <span class="focus bl"></span><span class="focus br"></span>
+      <div class="panel-top">
+        <h3 class="panel-title"><%= project.title %></h3>
+        <span class="panel-readout"><%= project.status %></span>
+      </div>
+      <p class="panel-desc"><%= project.summary %></p>
+      <div class="tags">
+        <% project.tags.forEach(function(tag) { %>
+          <span class="tag"><%= tag %></span>
+        <% }); %>
+      </div>
+    </a>
+  <% }); %>
+</div>
+

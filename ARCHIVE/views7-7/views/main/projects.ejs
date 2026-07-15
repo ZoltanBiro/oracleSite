@@ -1,0 +1,12 @@
+<section class="projects">
+  <h1>Projects</h1>
+
+  <% projects.forEach(function(project) { %>
+    <article class="project-card">
+      <h2><%= project.name %></h2>
+      <p><%= project.blurb %></p>
+      <p class="project-card__stack"><%= project.stack.join(' · ') %></p>
+      <a href="<%= project.link %>">View project →</a>
+    </article>
+  <% }); %>
+</section>

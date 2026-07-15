@@ -1,0 +1,34 @@
+<div class="spec-line">Project Report — <%= project.status %></div>
+<h1><%= project.title %></h1>
+<p class="lede"><%= project.summary %></p>
+
+<div class="section-title">Details</div>
+<div class="panel">
+  <span class="focus tl"></span><span class="focus tr"></span>
+  <span class="focus bl"></span><span class="focus br"></span>
+
+  <div class="tags">
+    <% project.tags.forEach(function(tag) { %>
+      <span class="tag"><%= tag %></span>
+    <% }); %>
+  </div>
+
+  <% if (project.links && (project.links.repo || project.links.demo)) { %>
+    <div class="tags" style="padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--rule);">
+      <% if (project.links.repo) { %>
+        <a class="btn" href="<%= project.links.repo %>" target="_blank" rel="noopener">Repo ↗</a>
+      <% } %>
+      <% if (project.links.demo) { %>
+        <a class="btn" href="<%= project.links.demo %>" target="_blank" rel="noopener">Live Demo ↗</a>
+      <% } %>
+    </div>
+  <% } %>
+</div>
+
+<div class="section-title">Write-Up</div>
+<% project.body.forEach(function(paragraph) { %>
+  <p class="lede"><%= paragraph %></p>
+<% }); %>
+
+<a class="btn" href="/projects" style="margin-top: 16px;">← Back to Projects</a>
+

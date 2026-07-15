@@ -1,0 +1,600 @@
+/* ==========================================================================
+   Zoltan Biro — Main Site Stylesheet
+   Design direction: "Viewfinder (Light)" — optics/instrument inspired.
+   Signature element: autofocus-bracket "panels" reused across every page.
+   ========================================================================== */
+
+:root {
+  --bg: #F1EFEA;
+  --panel: #FBFAF7;
+  --text: #1D1F22;
+  --text-soft: #78746C;
+  --amber: #B8720F;
+  --rule: #DEDACF;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   Fixed chrome: viewfinder frame corners + HUD readouts + top nav
+   These live in partials/main/header.ejs and appear on every page.
+   -------------------------------------------------------------------------- */
+
+.frame-corner {
+  position: fixed;
+  width: 34px;
+  height: 34px;
+  z-index: 40;
+  pointer-events: none;
+}
+.frame-corner::before,
+.frame-corner::after {
+  content: "";
+  position: absolute;
+  background: var(--text-soft);
+  opacity: 0.4;
+}
+.frame-corner::before { width: 100%; height: 1.5px; }
+.frame-corner::after { width: 1.5px; height: 100%; }
+
+.frame-corner.tl { top: 22px; left: 22px; }
+.frame-corner.tl::before, .frame-corner.tl::after { top: 0; left: 0; }
+.frame-corner.tr { top: 22px; right: 22px; }
+.frame-corner.tr::before { top: 0; right: 0; }
+.frame-corner.tr::after { top: 0; right: 0; }
+.frame-corner.bl { bottom: 22px; left: 22px; }
+.frame-corner.bl::before { bottom: 0; left: 0; }
+.frame-corner.bl::after { bottom: 0; left: 0; }
+.frame-corner.br { bottom: 22px; right: 22px; }
+.frame-corner.br::before { bottom: 0; right: 0; }
+.frame-corner.br::after { bottom: 0; right: 0; }
+
+.hud {
+  position: fixed;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hud.top-left { top: 36px; left: 46px; }
+.hud.top-right { top: 36px; right: 46px; }
+.hud.bottom-left { bottom: 36px; left: 46px; }
+.hud.bottom-right { bottom: 36px; right: 46px; }
+
+.hud .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+nav.top-nav {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 28px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  z-index: 40;
+  background: rgba(241, 239, 234, 0.85);
+  backdrop-filter: blur(4px);
+  padding: 8px 4px;
+}
+
+nav.top-nav a {
+  color: var(--text-soft);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+nav.top-nav a:hover {
+  color: var(--text);
+}
+nav.top-nav a.active {
+  color: var(--amber);
+}
+
+.nav-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--rule);
+  align-self: center;
+}
+
+nav.top-nav a.nav-lab {
+  color: var(--text-soft);
+  font-style: normal;
+}
+nav.top-nav a.nav-lab:hover {
+  color: var(--amber);
+}
+
+/* --------------------------------------------------------------------------
+   Page content wrapper
+   -------------------------------------------------------------------------- */
+
+.page-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 140px 40px 100px;
+}
+
+.spec-line {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--amber);
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.15;
+  margin: 0 0 24px 0;
+  max-width: 13ch;
+  color: var(--text);
+}
+h1 span { color: var(--amber); }
+
+.lede {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-soft);
+  max-width: 58ch;
+  margin: 0 0 56px 0;
+}
+
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-soft);
+  margin: 0 0 22px 0;
+}
+
+.section-title:not(:first-of-type) {
+  margin-top: 64px;
+}
+
+/* --------------------------------------------------------------------------
+   SIGNATURE COMPONENT: .panel
+   The autofocus-bracket panel is reused everywhere — About's quick facts,
+   Projects' project cards, Resume's entries, Contact's info block — so the
+   same visual idea carries the whole site instead of living on one page.
+   -------------------------------------------------------------------------- */
+
+.panel {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  padding: 28px 32px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.panel:hover {
+  border-color: rgba(184, 114, 15, 0.4);
+  box-shadow: 0 4px 20px rgba(29, 31, 34, 0.06);
+}
+
+.focus {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  transition: all 0.25s ease;
+}
+.focus::before, .focus::after {
+  content: "";
+  position: absolute;
+  background: var(--text-soft);
+  opacity: 0.7;
+  transition: background 0.25s ease, opacity 0.25s ease;
+}
+.focus::before { width: 100%; height: 2px; }
+.focus::after { width: 2px; height: 100%; }
+
+.focus.tl { top: -1px; left: -1px; }
+.focus.tl::before, .focus.tl::after { top: 0; left: 0; }
+.focus.tr { top: -1px; right: -1px; }
+.focus.tr::before { top: 0; right: 0; }
+.focus.tr::after { top: 0; right: 0; }
+.focus.bl { bottom: -1px; left: -1px; }
+.focus.bl::before { bottom: 0; left: 0; }
+.focus.bl::after { bottom: 0; left: 0; }
+.focus.br { bottom: -1px; right: -1px; }
+.focus.br::before { bottom: 0; right: 0; }
+.focus.br::after { bottom: 0; right: 0; }
+
+.panel:hover .focus {
+  width: 16px;
+  height: 16px;
+}
+.panel:hover .focus::before,
+.panel:hover .focus::after {
+  background: var(--amber);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel, .focus, .focus::before, .focus::after, nav.top-nav a {
+    transition: none;
+  }
+}
+
+.panel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.panel-title {
+  font-weight: 500;
+  font-size: 22px;
+  margin: 0;
+  color: var(--text);
+}
+
+.panel-readout {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--amber);
+  border: 1px solid rgba(184, 114, 15, 0.4);
+  padding: 3px 8px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.panel-desc {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text-soft);
+  margin: 0 0 20px 0;
+}
+.panel-desc:last-child { margin-bottom: 0; }
+
+/* Lets an entire .panel act as a clickable card (used on the homepage) */
+a.panel {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.directory-grid .panel-title {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.directory-grid .panel-desc {
+  margin-bottom: 0;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  border: 1px solid var(--rule);
+  color: var(--text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   About page: quick-facts grid
+   -------------------------------------------------------------------------- */
+
+.fact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.fact-grid .panel {
+  padding: 18px 20px;
+}
+
+.fact-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--amber);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.fact-value {
+  font-size: 15px;
+  color: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   About page: photo grid, styled like frames on a contact sheet
+   -------------------------------------------------------------------------- */
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.photo-grid .panel {
+  padding: 10px;
+}
+
+.photo-grid img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+}
+
+.photo-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 4px 2px;
+}
+
+.photo-caption .frame-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.photo-caption .frame-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Projects page: multi-panel grid
+   -------------------------------------------------------------------------- */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+/* --------------------------------------------------------------------------
+   Resume page: timeline entries + skills
+   -------------------------------------------------------------------------- */
+
+.resume-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.resume-org {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-soft);
+  margin: 0 0 2px 0;
+}
+
+.skills-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.skills-group-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--amber);
+  border: 1px solid rgba(184, 114, 15, 0.4);
+  padding: 10px 18px;
+  text-decoration: none;
+  background: var(--panel);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.btn:hover {
+  background: var(--amber);
+  color: var(--panel);
+}
+
+/* --------------------------------------------------------------------------
+   Contact page
+   -------------------------------------------------------------------------- */
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--text);
+}
+.contact-row:first-child { padding-top: 0; }
+.contact-row:last-child { border-bottom: none; }
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-soft);
+}
+
+.contact-value {
+  font-size: 16px;
+}
+
+.contact-arrow {
+  color: var(--amber);
+  font-family: var(--font-mono);
+  transition: transform 0.2s ease;
+}
+.contact-row:hover .contact-arrow {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px 40px;
+}
+
+.footer-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-links a {
+  color: var(--text-soft);
+  text-decoration: none;
+}
+.footer-links a:hover {
+  color: var(--amber);
+}
+.footer-links a.active {
+  color: var(--amber);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .frame-corner,
+  .hud {
+    display: none; /* the fixed overlay chrome gets cramped on small screens */
+  }
+
+  nav.top-nav {
+    position: static;
+    transform: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 16px 20px 0;
+    background: none;
+    backdrop-filter: none;
+  }
+
+  .page-content {
+    padding: 32px 20px 60px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  .fact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .directory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-divider {
+    display: none;
+  }
+
+  .panel-top {
+    flex-direction: column;
+  }
+}
+

@@ -1,0 +1,25 @@
+<%
+  // `page` is expected to be passed in from the route, e.g. res.render('main/about', { page: 'about' })
+  // locals.page is undefined (not a ReferenceError) if a route forgets to pass it.
+  const currentPage = locals.page || '';
+%>
+
+<div class="frame-corner tl"></div>
+<div class="frame-corner tr"></div>
+<div class="frame-corner bl"></div>
+<div class="frame-corner br"></div>
+
+<div class="hud top-left"><span class="dot"></span>zoltLand</div>
+<div class="hud top-right">2026</div>
+<div class="hud bottom-left">GSG</div>
+<div class="hud bottom-right">v1.0</div>
+
+<nav class="top-nav">
+  <a href="/" class="<%= currentPage === 'home' ? 'active' : '' %>">Home</a>
+  <a href="/about" class="<%= currentPage === 'about' ? 'active' : '' %>">About</a>
+  <a href="/projects" class="<%= currentPage === 'projects' ? 'active' : '' %>">Projects</a>
+  <a href="/blog" class="<%= currentPage === 'blog' ? 'active' : '' %>">Ramblings</a>
+  <span class="nav-divider"></span>
+  <a href="/labs" class="nav-lab">Labs ↗</a>
+</nav>
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> · Labs</title>
+  <link rel="stylesheet" href="/assets/labs/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/labs/favicon.svg">
+</head>
+<body class="labs">
+  <%- include('../partials/labs/header') %>
+
+  <main class="labs-content">
+    <%- body %>
+  </main>
+
+  <%- include('../partials/labs/footer') %>
+
+  <script src="/assets/labs/js/labs.js"></script>
+</body>
+</html>
