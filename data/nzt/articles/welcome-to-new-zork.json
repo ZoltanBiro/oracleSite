@@ -1,0 +1,45 @@
+{
+    "slug": "welcome-to-new-zork",
+    "headline": "New Zork Times Begins Publication Despite Limited Public Demand",
+    "dek": "The city's newest newspaper arrives with one editor, no printing press, and an uncertain publication schedule.",
+    "excerpt": "The New Zork Times officially began publication Friday morning, promising news, commentary and whatever else survives the editorial meeting.",
+    "byline": "Zoltan Biro",
+    "section": "News",
+    "published": "2026-08-28",
+    "displayDate": "August 28, 2026",
+    "readingTime": "4 min read",
+    "body": [
+      {
+        "type": "p",
+        "text": "NEW ZORK — The New Zork Times officially began publication Friday morning, entering an already crowded media landscape with a staff of approximately one person and a business model that remains under active investigation."
+      },
+      {
+        "type": "p",
+        "text": "The publication will cover local events, technology, sports, culture, opinion and subjects that editors describe only as \"important enough at the time.\""
+      },
+      {
+        "type": "subhead",
+        "text": "No Printing Press Required"
+      },
+      {
+        "type": "p",
+        "text": "Unlike traditional newspapers, the Times will exist entirely online. Management reportedly considered purchasing a printing press before determining that the financial and logistical requirements were inconsistent with the current newsroom budget."
+      },
+      {
+        "type": "quote",
+        "text": "We remain committed to producing journalism without accidentally purchasing industrial machinery."
+      },
+      {
+        "type": "p",
+        "text": "Each edition will be assembled from individually published stories, allowing articles to remain accessible through permanent links while also appearing within dated issues."
+      },
+      {
+        "type": "subhead",
+        "text": "Next Edition Unscheduled"
+      },
+      {
+        "type": "p",
+        "text": "The Times declined to commit to a weekly, monthly or otherwise predictable publication schedule. Readers were advised to check back whenever they remember."
+      }
+    ]
+  }

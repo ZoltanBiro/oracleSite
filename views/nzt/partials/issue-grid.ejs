@@ -1,0 +1,222 @@
+<section
+  class="edition-meta"
+  aria-label="Edition details"
+>
+
+  <span>
+    <%= issue.displayDate %>
+  </span>
+
+  <span>
+    VOL. <%= issue.volume %>
+    ·
+    NO. <%= issue.number %>
+  </span>
+
+  <span>
+    <%= issue.location || 'NEW ZORK' %>
+  </span>
+
+</section>
+
+
+<% if (issue.lead) { %>
+
+  <section class="lead-grid">
+
+
+    <article class="lead-story">
+
+      <% if (issue.lead.section) { %>
+
+        <p class="story-kicker">
+          <%= issue.lead.section %>
+        </p>
+
+      <% } %>
+
+
+      <h1 class="lead-story__headline">
+
+        <a href="/nzt/article/<%= issue.lead.slug %>">
+          <%= issue.lead.headline %>
+        </a>
+
+      </h1>
+
+
+      <% if (issue.lead.dek) { %>
+
+        <p class="lead-story__dek">
+          <%= issue.lead.dek %>
+        </p>
+
+      <% } else if (issue.lead.excerpt) { %>
+
+        <p class="lead-story__dek">
+          <%= issue.lead.excerpt %>
+        </p>
+
+      <% } %>
+
+
+      <% if (issue.lead.byline) { %>
+
+        <p class="byline">
+          By <%= issue.lead.byline %>
+        </p>
+
+      <% } %>
+
+    </article>
+
+
+
+    <% if (issue.secondary && issue.secondary.length) { %>
+
+      <div class="secondary-stories">
+
+        <% issue.secondary.forEach(function(story) { %>
+
+          <article class="story-card story-card--secondary">
+
+            <% if (story.section) { %>
+
+              <p class="story-kicker">
+                <%= story.section %>
+              </p>
+
+            <% } %>
+
+
+            <h2>
+
+              <a href="/nzt/article/<%= story.slug %>">
+                <%= story.headline %>
+              </a>
+
+            </h2>
+
+
+            <% if (story.excerpt) { %>
+
+              <p>
+                <%= story.excerpt %>
+              </p>
+
+            <% } else if (story.dek) { %>
+
+              <p>
+                <%= story.dek %>
+              </p>
+
+            <% } %>
+
+
+            <% if (story.byline) { %>
+
+              <p class="byline">
+                By <%= story.byline %>
+              </p>
+
+            <% } %>
+
+          </article>
+
+        <% }); %>
+
+      </div>
+
+    <% } %>
+
+
+  </section>
+
+<% } %>
+
+
+
+<% (issue.sections || []).forEach(function(section) { %>
+
+  <% if (section.stories && section.stories.length) { %>
+
+    <section class="news-section">
+
+
+      <div class="section-heading">
+
+        <h2>
+          <%= section.name %>
+        </h2>
+
+        <% if (section.tagline) { %>
+
+          <span>
+            <%= section.tagline %>
+          </span>
+
+        <% } %>
+
+      </div>
+
+
+      <div class="story-grid">
+
+        <% section.stories.forEach(function(story) { %>
+
+          <article class="story-card">
+
+
+            <% if (story.section) { %>
+
+              <p class="story-kicker">
+                <%= story.section %>
+              </p>
+
+            <% } %>
+
+
+            <h3>
+
+              <a href="/nzt/article/<%= story.slug %>">
+                <%= story.headline %>
+              </a>
+
+            </h3>
+
+
+            <% if (story.excerpt) { %>
+
+              <p>
+                <%= story.excerpt %>
+              </p>
+
+            <% } else if (story.dek) { %>
+
+              <p>
+                <%= story.dek %>
+              </p>
+
+            <% } %>
+
+
+            <% if (story.byline) { %>
+
+              <p class="byline">
+                By <%= story.byline %>
+              </p>
+
+            <% } %>
+
+
+          </article>
+
+        <% }); %>
+
+      </div>
+
+    </section>
+
+  <% } %>
+
+<% }); %>

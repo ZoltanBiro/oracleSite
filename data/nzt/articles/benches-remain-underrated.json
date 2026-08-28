@@ -1,0 +1,37 @@
+{
+    "slug": "benches-remain-underrated",
+    "headline": "Opinion: Benches Remain One of Society's Best Technologies",
+    "dek": "They require no account, no software update and almost no onboarding.",
+    "excerpt": "Before commissioning another platform, city leaders should consider the humble public bench.",
+    "byline": "The Editorial Board",
+    "section": "Opinion",
+    "published": "2026-08-28",
+    "displayDate": "August 28, 2026",
+    "readingTime": "3 min read",
+    "body": [
+      {
+        "type": "p",
+        "text": "New Zork has embraced technology enthusiastically. Services have apps, buildings have QR codes and simple processes increasingly require creating an account."
+      },
+      {
+        "type": "p",
+        "text": "Against this backdrop, the public bench remains a triumph of restraint."
+      },
+      {
+        "type": "subhead",
+        "text": "Immediate User Adoption"
+      },
+      {
+        "type": "p",
+        "text": "A bench requires no tutorial. Its interface is obvious. Its core function is immediately discoverable. Users generally understand the product within seconds."
+      },
+      {
+        "type": "quote",
+        "text": "The bench may be the finest example of frictionless onboarding ever deployed."
+      },
+      {
+        "type": "p",
+        "text": "The Editorial Board therefore encourages city officials to install more benches before approving any initiative containing the phrase \"digital transformation.\""
+      }
+    ]
+  }

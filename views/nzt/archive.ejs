@@ -1,0 +1,60 @@
+<div class="shell archive-page">
+
+    <header class="page-heading">
+  
+      <p class="eyebrow">
+        The Morgue
+      </p>
+  
+      <h1>Edition Archive</h1>
+  
+      <p>
+        Every issue of the New Zork Times, filed in reverse
+        chronological order.
+      </p>
+  
+    </header>
+  
+  
+    <div class="archive-list">
+  
+      <% issues.forEach(function(issue) { %>
+  
+        <a
+          class="archive-item"
+          href="/nzt/issue/<%= issue.slug %>"
+        >
+  
+          <span class="archive-item__date">
+            <%= issue.displayDate %>
+          </span>
+  
+          <span class="archive-item__label">
+  
+            <% if (issue.label) { %>
+  
+              <%= issue.label %>
+  
+            <% } else { %>
+  
+              Volume <%= issue.volume %>,
+              Number <%= issue.number %>
+  
+            <% } %>
+  
+          </span>
+  
+          <span
+            class="archive-item__arrow"
+            aria-hidden="true"
+          >
+            →
+          </span>
+  
+        </a>
+  
+      <% }); %>
+  
+    </div>
+  
+  </div>

@@ -1,0 +1,97 @@
+<article class="shell article-page">
+
+    <header class="article-header">
+  
+      <% if (article.section) { %>
+        <a class="article-section" href="/nzt">
+          <%= article.section %>
+        </a>
+      <% } %>
+  
+      <h1><%= article.headline %></h1>
+  
+      <% if (article.dek) { %>
+        <p class="article-dek">
+          <%= article.dek %>
+        </p>
+      <% } %>
+  
+      <div class="article-meta">
+  
+        <% if (article.byline) { %>
+          <span>
+            By <strong><%= article.byline %></strong>
+          </span>
+        <% } %>
+  
+        <% if (article.displayDate) { %>
+          <span><%= article.displayDate %></span>
+        <% } %>
+  
+        <% if (article.readingTime) { %>
+          <span><%= article.readingTime %></span>
+        <% } %>
+  
+      </div>
+  
+    </header>
+  
+  
+    <% if (article.image && article.image.src) { %>
+  
+      <figure class="article-figure">
+  
+        <img
+          src="<%= article.image.src %>"
+          alt="<%= article.image.alt || '' %>"
+        >
+  
+        <% if (article.image.caption) { %>
+          <figcaption>
+            <%= article.image.caption %>
+          </figcaption>
+        <% } %>
+  
+      </figure>
+  
+    <% } %>
+  
+  
+    <div class="article-body">
+  
+      <% (article.body || []).forEach(function(block) { %>
+  
+        <% if (block.type === 'subhead') { %>
+  
+          <h2><%= block.text %></h2>
+  
+        <% } else if (block.type === 'quote') { %>
+  
+          <blockquote>
+            <%= block.text %>
+          </blockquote>
+  
+        <% } else { %>
+  
+          <p><%= block.text %></p>
+  
+        <% } %>
+  
+      <% }); %>
+  
+    </div>
+  
+  
+    <footer class="article-footer">
+  
+      <a href="/nzt">
+        ← Return to the front page
+      </a>
+  
+      <a href="/nzt/archive">
+        Archive →
+      </a>
+  
+    </footer>
+  
+  </article>

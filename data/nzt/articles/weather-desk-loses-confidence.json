@@ -1,0 +1,29 @@
+{
+    "slug": "weather-desk-loses-confidence",
+    "headline": "Weather Desk Admits Forecast Has Become Mostly Guesswork",
+    "dek": "Meteorologists remain confident that some form of weather will occur.",
+    "excerpt": "After several conflicting forecasts, the New Zork Weather Desk has revised its outlook to \"probably outside.\"",
+    "byline": "NZT Weather Desk",
+    "section": "Weather",
+    "published": "2026-08-28",
+    "displayDate": "August 28, 2026",
+    "readingTime": "2 min read",
+    "body": [
+      {
+        "type": "p",
+        "text": "NEW ZORK — The New Zork Times Weather Desk issued a revised forecast Friday after admitting that earlier predictions had become increasingly difficult to defend."
+      },
+      {
+        "type": "p",
+        "text": "The updated forecast calls for temperatures, clouds in some locations, possible sunlight and a continuing chance that conditions will change without consulting anyone."
+      },
+      {
+        "type": "quote",
+        "text": "We can say with considerable confidence that people should look outside before leaving home."
+      },
+      {
+        "type": "p",
+        "text": "The Weather Desk emphasized that its models remain sophisticated and that the atmosphere continues to be uncooperative."
+      }
+    ]
+  }
