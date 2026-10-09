@@ -9,7 +9,6 @@ const MongoStore = require('connect-mongo');
 const connectDB = require('./config/db');
 const mainRoutes = require('./routes/main');
 const labsRoutes = require('./routes/labs');
-const nztRoutes = require('./routes/nzt')
 
 const app = express();
 app.set('trust proxy',1);
@@ -29,7 +28,6 @@ app.use(express.json());
 // so the two sections never share CSS/JS by accident.
 app.use('/assets/main', express.static(path.join(__dirname, 'public/main')));
 app.use('/assets/labs', express.static(path.join(__dirname, 'public/labs')));
-app.use('/assets/nzt',express.static(path.join(__dirname, 'public/nzt')));
 
 // ---------- Session (used by Labs auth only, but set up globally) ----------
 // Labs apps that need login will read req.session.user. Main site ignores this entirely.
@@ -49,7 +47,6 @@ app.use(session({
 // ---------- Routes ----------
 app.use('/', mainRoutes);
 app.use('/labs', labsRoutes);
-app.use('/nzt', nztRouter);
 
 // ---------- 404 handler ----------
 app.use((req, res) => {

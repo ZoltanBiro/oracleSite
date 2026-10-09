@@ -1,25 +1,21 @@
-<%
-  // `page` is expected to be passed in from the route, e.g. res.render('main/about', { page: 'about' })
-  // locals.page is undefined (not a ReferenceError) if a route forgets to pass it.
-  const currentPage = locals.page || '';
-%>
-
-<div class="frame-corner tl"></div>
-<div class="frame-corner tr"></div>
-<div class="frame-corner bl"></div>
-<div class="frame-corner br"></div>
-
-<div class="hud top-left"><span class="dot"></span>zoltLand</div>
-<div class="hud top-right">2026</div>
-<div class="hud bottom-left">GSG</div>
-<div class="hud bottom-right">v1.0</div>
-
-<nav class="top-nav">
-  <a href="/" class="<%= currentPage === 'home' ? 'active' : '' %>">Home</a>
-  <a href="/about" class="<%= currentPage === 'about' ? 'active' : '' %>">About</a>
-  <a href="/projects" class="<%= currentPage === 'projects' ? 'active' : '' %>">Projects</a>
-  <a href="/blog" class="<%= currentPage === 'blog' ? 'active' : '' %>">Ramblings</a>
-  <span class="nav-divider"></span>
-  <a href="/labs" class="nav-lab">Labs ↗</a>
-</nav>
-
+<% const currentPage = locals.page || ''; %>
+<div class="frame-corner tl" aria-hidden="true"></div>
+<div class="frame-corner tr" aria-hidden="true"></div>
+<div class="frame-corner bl" aria-hidden="true"></div>
+<div class="frame-corner br" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-brand" href="/" aria-label="Zoltan Biro home">ZB.DEV</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="top-nav" id="site-navigation" aria-label="Main navigation">
+      <a href="/" class="<%= currentPage === 'home' ? 'active' : '' %>" <%- currentPage === 'home' ? 'aria-current="page"' : '' %>><span class="nav-num">01.</span> Home</a>
+      <a href="/about" class="<%= currentPage === 'about' ? 'active' : '' %>" <%- currentPage === 'about' ? 'aria-current="page"' : '' %>><span class="nav-num">02.</span> About</a>
+      <a href="/projects" class="<%= currentPage === 'projects' ? 'active' : '' %>" <%- currentPage === 'projects' ? 'aria-current="page"' : '' %>><span class="nav-num">03.</span> Projects</a>
+      <a href="/blog" class="<%= currentPage === 'blog' ? 'active' : '' %>" <%- currentPage === 'blog' ? 'aria-current="page"' : '' %>><span class="nav-num">04.</span> Blog</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a class="nav-lab" href="/labs"><span class="nav-num">05.</span> Labs <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>

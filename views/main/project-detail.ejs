@@ -1,34 +1,21 @@
-<div class="spec-line">Project Report — <%= project.status %></div>
-<h1><%= project.title %></h1>
-<p class="lede"><%= project.summary %></p>
-
-<div class="section-title">Details</div>
-<div class="panel">
-  <span class="focus tl"></span><span class="focus tr"></span>
-  <span class="focus bl"></span><span class="focus br"></span>
-
-  <div class="tags">
-    <% project.tags.forEach(function(tag) { %>
-      <span class="tag"><%= tag %></span>
-    <% }); %>
-  </div>
-
-  <% if (project.links && (project.links.repo || project.links.demo)) { %>
-    <div class="tags" style="padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--rule);">
-      <% if (project.links.repo) { %>
-        <a class="btn" href="<%= project.links.repo %>" target="_blank" rel="noopener">Repo ↗</a>
-      <% } %>
-      <% if (project.links.demo) { %>
-        <a class="btn" href="<%= project.links.demo %>" target="_blank" rel="noopener">Live Demo ↗</a>
-      <% } %>
-    </div>
-  <% } %>
+<section class="page-intro detail-intro">
+  <a class="back-link" href="/projects">← All projects</a>
+  <p class="eyebrow">PROJECT REPORT / <%= project.status %></p>
+  <h1><%= project.title %></h1>
+  <p><%= project.summary %></p>
+</section>
+<div class="detail-grid">
+  <aside class="content-card focus-frame detail-aside">
+    <span class="small-label">PROJECT DETAILS</span>
+    <p class="aside-label">Status</p><p class="aside-value"><%= project.status %></p>
+    <p class="aside-label">Technologies</p>
+    <div class="tags"><% (project.tags || []).forEach(function(tag) { %><span class="tag"><%= tag %></span><% }); %></div>
+    <% if (project.links && project.links.demo) { %><a class="text-cta" href="<%= project.links.demo %>" target="_blank" rel="noopener noreferrer">Live demo ↗</a><% } %>
+    <% if (project.links && project.links.repo && !project.links.repo.includes('YOUR-USERNAME')) { %><a class="text-cta" href="<%= project.links.repo %>" target="_blank" rel="noopener noreferrer">Repository ↗</a><% } %>
+  </aside>
+  <article class="content-card focus-frame prose-card">
+    <span class="small-label">THE WRITE-UP</span>
+    <% (project.body || []).forEach(function(paragraph) { %><p><%= paragraph %></p><% }); %>
+  </article>
 </div>
-
-<div class="section-title">Write-Up</div>
-<% project.body.forEach(function(paragraph) { %>
-  <p class="lede"><%= paragraph %></p>
-<% }); %>
-
-<a class="btn" href="/projects" style="margin-top: 16px;">← Back to Projects</a>
-
+<div class="end-link"><a href="/projects">← Back to projects</a></div>
