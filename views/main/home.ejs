@@ -1,57 +1,51 @@
-<div class="spec-line">Welcome</div>
-<h1>Hi, I'm <span>Zoltan</span></h1>
+<% const latestPosts = (locals.posts || []).slice(0, 4); %>
+<section class="home-hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <div class="eyebrow">[ 01 ] &nbsp; / &nbsp; HELLO THERE</div>
+    <h1 id="hero-title">Zoltan Biro<span class="hero-line">Builds things, writes about them, and occasionally gets lost in New Zork.</span></h1>
+    <p class="hero-desc">A mix of software, curiosity, and slightly questionable side projects. This is my corner of the internet.</p>
+    <a class="button button-primary" href="#explore">Explore the site <span aria-hidden="true">↘</span></a>
+  </div>
+  <figure class="hero-visual focus-frame">
+    <img src="/assets/main/images/hero-mountains.webp" alt="Mountain range reflected in a lake at sunset" width="1206" height="692" fetchpriority="high">
+    <figcaption><span>// YYC, CA</span><span>// EST. 2026</span></figcaption>
+    <span class="image-counter">01 / 01</span>
+  </figure>
+</section>
 
-<p class = "lede">
-  Definately on the extreme end of the "high effort arts and crafts" spectrum here. So yeah, i built a website. Probably would've been more helpful when I was looking for a job rather than after.. but whatever. But it's alright now it's all for me, i get to make typos and swear, and I'm doing it for me - a much more fun motivator. The drive for this comes mostly out of the "do hard things to get good at doing hard things" motivation - and that being said I am vibe coding most of this. So this main section is going to be vibecode slop that I would feel amiss if I didn't make a personal site, so it gets vibe coded together. Then it brings us to the lab where i'll put more zoltan into it and code cool stuff. The front end will still probably be ai'ed but that's alright, i genually think that's a fair and good use case for the tool. There's some other stuff on the site, and it'll grow and evolve as long as I remain interested in it.
-</p>
-<!--
-<p class="lede">
-  I'm a computer science grad who likes building and running my own
-  infrastructure as much as writing the code that sits on top of it. This
-  site is where that shows up — a normal portfolio, plus a sandbox where I
-  keep breaking and rebuilding things in public.
-</p>
--->
-<div class="section-title">Where To Go</div>
-<div class="directory-grid">
-
-  <a class="panel" href="/about">
-    <span class="focus tl"></span><span class="focus tr"></span>
-    <span class="focus bl"></span><span class="focus br"></span>
-    <h3 class="panel-title">About</h3>
-    <p class="panel-desc">Who I am, outside of the resume version.</p>
-  </a>
-
-  <a class="panel" href="/projects">
-    <span class="focus tl"></span><span class="focus tr"></span>
-    <span class="focus bl"></span><span class="focus br"></span>
-    <h3 class="panel-title">Projects</h3>
-    <p class="panel-desc">A handful of things I've built and what I learned.</p>
-  </a>
-
-  <a class="panel" href="/resume">
-    <span class="focus tl"></span><span class="focus tr"></span>
-    <span class="focus bl"></span><span class="focus br"></span>
-    <h3 class="panel-title">Resume</h3>
-    <p class="panel-desc">Coursework, experience, and a PDF you can download.</p>
-  </a>
-
-  <a class="panel" href="/blog">
-    <span class="focus tl"></span><span class="focus tr"></span>
-    <span class="focus bl"></span><span class="focus br"></span>
-    <h3 class="panel-title">Blog</h3>
-    <p class="panel-desc">Notes and write-ups — nothing here yet, but it's coming.</p>
-  </a>
-
-  <a class="panel" href="/labs">
-    <span class="focus tl"></span><span class="focus tr"></span>
-    <span class="focus bl"></span><span class="focus br"></span>
-    <h3 class="panel-title">Labs ↗</h3>
-    <p class="panel-desc">
-      A separate, rougher sandbox of small experiments and half-finished
-      tools. Different vibe on purpose — go in with lower expectations.
-    </p>
-  </a>
-
-</div>
-
+<section class="bento-section" id="explore" aria-label="Explore the site">
+  <div class="bento-grid">
+    <article class="bento-card bento-feature focus-frame">
+      <div class="bento-heading"><span>[ 02 ]<strong>Featured project</strong></span><a href="/projects">View all <span aria-hidden="true">→</span></a></div>
+      <a class="feature-body" href="/nzt" aria-label="Open New Zork Times">
+        <div class="feature-text"><h2>New Zork Times</h2><p>A newspaper experiment from New Zork. Real game data, fake news, questionable journalism.</p><div class="tags"><span class="tag">#ZORK</span><span class="tag">#WRITING</span><span class="tag">#GAMING</span></div></div>
+        <img src="/assets/main/images/nzt-preview.webp" alt="Black-and-white fantasy newspaper illustration" width="522" height="423" loading="lazy">
+      </a>
+    </article>
+    <article class="bento-card bento-writing focus-frame">
+      <div class="bento-heading"><span>[ 03 ]<strong>Latest writing</strong></span><a href="/blog">View all <span aria-hidden="true">→</span></a></div>
+      <% if (latestPosts.length) { %>
+        <div class="writing-list">
+          <% latestPosts.forEach(function(post) { %>
+            <a href="/blog" class="writing-item"><time><%= post.date %></time><span><%= post.title %></span><span aria-hidden="true">↗</span></a>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <p class="empty-note">Writing will appear here as soon as there's something to read.</p>
+      <% } %>
+    </article>
+    <article class="bento-card bento-labs focus-frame">
+      <div class="bento-heading"><span>[ 04 ]<strong>Labs</strong></span><a href="/labs">View all <span aria-hidden="true">→</span></a></div>
+      <a class="mini-feature" href="/labs"><img src="/assets/main/images/labs-preview.webp" alt="Retro computer window with a smiling icon" width="484" height="516" loading="lazy"><div><h2>Small ideas, loosely held.</h2><p>A sandbox for experiments, tools, and oddly specific applications.</p><div class="tags"><span class="tag">#EXPERIMENTS</span><span class="tag">#TOOLS</span></div></div></a>
+    </article>
+    <article class="bento-card bento-about focus-frame">
+      <div class="bento-heading"><span>[ 05 ]<strong>About</strong></span></div>
+      <div class="mini-feature"><img src="/assets/main/images/about-preview.webp" alt="Person looking toward the mountains" width="498" height="453" loading="lazy"><div><p>Developer, tinkerer, note-taker, and occasional writer. Based in Calgary.</p><a class="text-cta" href="/about">More about me <span aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="bento-card bento-resume focus-frame">
+      <div class="bento-heading"><span>[ 06 ]<strong>Resume</strong></span></div>
+      <div class="resume-mini"><img class="resume-icon-image" src="/assets/main/images/resume-icon.webp" width="246" height="300" loading="lazy" alt=""><p>Experience, skills, and the formal version.</p></div>
+      <a class="text-cta" href="/resume">View resume <span aria-hidden="true">→</span></a>
+    </article>
+  </div>
+</section>

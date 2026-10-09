@@ -1,25 +1,18 @@
-<div class="spec-line">Selected Work</div>
-<h1>Things I <span>built</span></h1>
-<p class="lede">
-Projects are a really good way to stay sharp, so I did them. To stay even sharper, you can write about them. The following are some projects that had enough meat I could (and wanted) to write about. Most projects will live here <a href="/labs">Labs</a>, hopefully hosted - but probably a little rough. Click a project for my write-up.
-</p>
-
-<div class="project-grid">
-  <% projects.forEach(function(project) { %>
-    <a class="panel" href="/project/<%= project.slug %>">
-      <span class="focus tl"></span><span class="focus tr"></span>
-      <span class="focus bl"></span><span class="focus br"></span>
-      <div class="panel-top">
-        <h3 class="panel-title"><%= project.title %></h3>
-        <span class="panel-readout"><%= project.status %></span>
-      </div>
-      <p class="panel-desc"><%= project.summary %></p>
-      <div class="tags">
-        <% project.tags.forEach(function(tag) { %>
-          <span class="tag"><%= tag %></span>
-        <% }); %>
-      </div>
-    </a>
-  <% }); %>
-</div>
-
+<section class="page-intro">
+  <p class="eyebrow">[ 02 ] / SELECTED WORK</p>
+  <h1>Things I've <em>built.</em></h1>
+  <p>Some projects are worth a proper write-up. The smaller, stranger experiments usually end up over in <a href="/labs">Labs</a>.</p>
+</section>
+<section class="index-section" aria-label="Projects">
+  <div class="section-heading"><span>Project index</span><span><%= projects.length %> entries</span></div>
+  <div class="project-grid">
+    <% projects.forEach(function(project, index) { %>
+      <a class="content-card focus-frame project-card" href="/project/<%= encodeURIComponent(project.slug) %>">
+        <div class="card-meta"><span>[ <%= String(index + 1).padStart(2, '0') %> ]</span><span><%= project.status %></span></div>
+        <h2><%= project.title %></h2>
+        <p><%= project.summary %></p>
+        <div class="card-bottom"><div class="tags"><% (project.tags || []).forEach(function(tag){ %><span class="tag"><%= tag %></span><% }); %></div><span aria-hidden="true" class="card-arrow">↗</span></div>
+      </a>
+    <% }); %>
+  </div>
+</section>

@@ -1,82 +1,22 @@
-<div class="spec-line">Resume</div>
-<h1>Coursework &amp; <span>experience.</span></h1>
-<p class="lede">
-  A short version of the story. For the full one, grab the PDF.
-</p>
-
-<a class="btn" href="/resume.pdf" download>Download PDF ↓</a>
-
-<div class="section-title">Experience</div>
-<div class="resume-list">
-  <div class="panel">
-    <span class="focus tl"></span><span class="focus tr"></span>
-    <span class="focus bl"></span><span class="focus br"></span>
-    <div class="panel-top">
-      <div>
-        <h3 class="panel-title">Software Engineering Intern</h3>
-        <p class="resume-org">Company Name</p>
-      </div>
-      <span class="panel-readout">Summer 2025</span>
-    </div>
-    <p class="panel-desc">
-      One or two lines on what you actually did and the impact — a number
-      or outcome if you have one.
-    </p>
-    <div class="tags">
-      <span class="tag">Stack</span>
-      <span class="tag">Used</span>
-      <span class="tag">Here</span>
-    </div>
+<section class="page-intro">
+  <p class="eyebrow">[ 04 ] / THE FORMAL VERSION</p>
+  <h1>Experience &amp; skills.</h1>
+  <p>A shorter, more conventional version of what I do. Still a work in progress.</p>
+  <% if (hasResumePdf) { %><a class="button button-primary" href="/assets/main/resume.pdf" download>Download PDF ↘</a><% } else { %><p class="small-note">PDF download will appear here when <code>public/main/resume.pdf</code> is added.</p><% } %>
+</section>
+<section class="resume-grid" aria-label="Resume details">
+  <div class="content-card focus-frame resume-block">
+    <span class="small-label">[ 01 ] / EXPERIENCE</span>
+    <div class="resume-entry"><div><h2>Software Engineering Intern</h2><p>Company Name</p></div><span>Summer 2025</span></div>
+    <p class="resume-description">Replace this placeholder with your real work and its impact.</p>
   </div>
-</div>
-
-<div class="section-title">Education</div>
-<div class="resume-list">
-  <div class="panel">
-    <span class="focus tl"></span><span class="focus tr"></span>
-    <span class="focus bl"></span><span class="focus br"></span>
-    <div class="panel-top">
-      <div>
-        <h3 class="panel-title">B.Sc. Computer Science</h3>
-        <p class="resume-org">University Name</p>
-      </div>
-      <span class="panel-readout">Expected 2026</span>
-    </div>
-    <p class="panel-desc">
-      Relevant coursework: data structures &amp; algorithms, operating
-      systems, databases, networks — whatever's actually relevant.
-    </p>
+  <div class="content-card focus-frame resume-block">
+    <span class="small-label">[ 02 ] / EDUCATION</span>
+    <div class="resume-entry"><div><h2>B.Sc. Computer Science</h2><p>University Name</p></div><span>2026</span></div>
+    <p class="resume-description">Replace this with your university and relevant coursework.</p>
   </div>
-</div>
-
-<div class="section-title">Skills</div>
-<div class="skills-groups">
-  <div>
-    <p class="skills-group-label">Languages</p>
-    <div class="tags">
-      <span class="tag">JavaScript</span>
-      <span class="tag">Python</span>
-      <span class="tag">SQL</span>
-      <span class="tag">C</span>
-    </div>
+  <div class="content-card focus-frame resume-block resume-skills">
+    <span class="small-label">[ 03 ] / TOOLBOX</span>
+    <div class="skills-layout"><div><h3>Languages</h3><div class="tags"><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">C</span></div></div><div><h3>Frameworks</h3><div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">EJS</span><span class="tag">MongoDB</span></div></div><div><h3>Infrastructure</h3><div class="tags"><span class="tag">Linux</span><span class="tag">Nginx</span><span class="tag">PM2</span><span class="tag">Oracle Cloud</span></div></div></div>
   </div>
-  <div>
-    <p class="skills-group-label">Frameworks &amp; Tools</p>
-    <div class="tags">
-      <span class="tag">Node.js</span>
-      <span class="tag">Express</span>
-      <span class="tag">EJS</span>
-      <span class="tag">MongoDB</span>
-    </div>
-  </div>
-  <div>
-    <p class="skills-group-label">Infra</p>
-    <div class="tags">
-      <span class="tag">Linux</span>
-      <span class="tag">Nginx</span>
-      <span class="tag">pm2</span>
-      <span class="tag">Oracle Cloud</span>
-    </div>
-  </div>
-</div>
-
+</section>

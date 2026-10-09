@@ -1,12 +1,13 @@
 <footer class="site-footer">
   <div class="footer-inner">
-    <span class="footer-copy">&copy; <%= new Date().getFullYear() %> Zoltan Biro</span>
-    <div class="footer-links">
+    <small>© <%= new Date().getFullYear() %> Zoltan Biro</small>
+    <nav class="footer-links" aria-label="Footer">
       <a href="/resume" class="<%= locals.page === 'resume' ? 'active' : '' %>">Resume</a>
-      <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:you@zoltanbiro.ca">Email</a>
-    </div>
+      <% if (locals.siteLinks && locals.siteLinks.github) { %><a href="<%= locals.siteLinks.github %>" target="_blank" rel="noopener noreferrer">GitHub</a><% } %>
+      <% if (locals.siteLinks && locals.siteLinks.linkedin) { %><a href="<%= locals.siteLinks.linkedin %>" target="_blank" rel="noopener noreferrer">LinkedIn</a><% } %>
+      <% if (locals.siteLinks && locals.siteLinks.email) { %><a href="mailto:<%= locals.siteLinks.email %>">Email</a><% } %>
+      <a href="/labs">Labs</a>
+    </nav>
+    <span class="footer-meta">YYC · CA <span class="footer-version">v2.0</span></span>
   </div>
 </footer>
-
