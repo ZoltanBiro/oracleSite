@@ -1,10 +1,17 @@
 <header class="labs-header">
-  <div class="labs-header__brand">
-    <a href="/labs">Labs</a>
-    <span class="labs-header__tag">// experiments, not portfolio pieces</span>
+  <div class="labs-header__inner">
+    <a class="labs-brand" href="/" aria-label="Zoltan Biro — main site">ZB.DEV</a>
+    <button type="button" class="labs-nav-toggle" aria-controls="labs-navigation" aria-expanded="false" aria-label="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="labs-nav" id="labs-navigation" aria-label="Site navigation">
+      <a href="/"><span>01.</span> HOME</a>
+      <a href="/about"><span>02.</span> ABOUT</a>
+      <a href="/projects"><span>03.</span> PROJECTS</a>
+      <a href="/blog"><span>04.</span> BLOG</a>
+      <span class="labs-nav__rule" aria-hidden="true"></span>
+      <a class="is-current" href="/labs" aria-current="page"><span>05.</span> LABS <span aria-hidden="true">↗</span></a>
+    </nav>
+    <span class="labs-header__location">YYC · CA</span>
   </div>
-  <nav class="labs-header__nav">
-    <a href="/labs">All Labs</a>
-    <a href="/">Back to main site</a>
-  </nav>
 </header>

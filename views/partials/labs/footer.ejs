@@ -1,3 +1,19 @@
 <footer class="labs-footer">
-  <p>These are unpolished experiments — expect rough edges. <a href="/">Main site here.</a></p>
+  <div class="labs-footer__inner">
+    <small>© <%= new Date().getFullYear() %> Zoltan Biro</small>
+    <nav aria-label="Footer navigation" class="labs-footer__links">
+      <a href="/">Main site</a>
+      <a href="/resume">Resume</a>
+      <% if (locals.siteLinks && locals.siteLinks.github) { %>
+        <a href="<%= locals.siteLinks.github %>" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <% } %>
+      <% if (locals.siteLinks && locals.siteLinks.linkedin) { %>
+        <a href="<%= locals.siteLinks.linkedin %>" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <% } %>
+      <% if (locals.siteLinks && locals.siteLinks.email) { %>
+        <a href="mailto:<%= locals.siteLinks.email %>">Email</a>
+      <% } %>
+    </nav>
+    <span class="labs-footer__meta">YYC · CA <span>LABS / v1.0</span></span>
+  </div>
 </footer>
