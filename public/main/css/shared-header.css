@@ -1,0 +1,134 @@
+/* Shared ZB.DEV header — one set of dimensions for both Home and Labs.
+   Both EJS layouts load this last. Only the theme tokens change between pages. */
+body.site-body {
+  --nav-ink: var(--ink);
+  --nav-accent: var(--accent-dark);
+  --nav-rule: var(--rule);
+  --nav-fine-rule: var(--fine-rule);
+  --nav-bg: var(--bg);
+}
+body.labs {
+  --nav-ink: var(--lab-ink);
+  --nav-accent: var(--lab-accent);
+  --nav-rule: var(--lab-rule);
+  --nav-fine-rule: var(--lab-faint);
+  --nav-bg: var(--lab-bg);
+}
+
+/* Keep the centered navigation in the same position on pages with and
+   without a vertical scrollbar (where the browser supports it). */
+html { scrollbar-gutter: stable; }
+
+.frame-corner {
+  position: fixed;
+  z-index: 50;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+}
+.frame-corner::before, .frame-corner::after {
+  content: '';
+  position: absolute;
+  background: var(--nav-ink);
+}
+.frame-corner::before { width: 26px; height: 1.5px; }
+.frame-corner::after { width: 1.5px; height: 26px; }
+.frame-corner.tl { top: 19px; left: 24px; }
+.frame-corner.tr { top: 19px; right: 24px; transform: scaleX(-1); }
+.frame-corner.bl { bottom: 19px; left: 24px; transform: scaleY(-1); }
+.frame-corner.br { bottom: 19px; right: 24px; transform: scale(-1,-1); }
+
+.site-header { position: relative; z-index: 60; }
+.header-inner {
+  max-width: 1220px;
+  min-height: 77px;
+  padding: 0 24px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+.site-brand {
+  justify-self: start;
+  font: 600 12px 'IBM Plex Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: .02em;
+  color: var(--nav-ink);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.site-brand:hover { color: var(--nav-accent); }
+.top-nav {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: clamp(17px, 3vw, 45px);
+  font: 500 12px 'IBM Plex Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: .005em;
+  text-transform: uppercase;
+}
+.top-nav a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  position: relative;
+  padding: 24px 0 20px;
+  color: var(--nav-ink);
+  white-space: nowrap;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color .18s, border-color .18s;
+}
+.top-nav a.active { color: var(--nav-accent); border-color: var(--nav-ink); }
+.top-nav a:hover { color: var(--nav-accent); }
+.nav-num { color: inherit; }
+.nav-divider { width: 1px; height: 29px; background: var(--nav-ink); margin: 0 0 0 7px; }
+.nav-lab { margin-left: 2px; }
+.nav-toggle { display: none; }
+
+@media (max-width: 1100px) {
+  .header-inner { max-width: 1020px; }
+}
+@media (max-width: 820px) {
+  .frame-corner { display: none; }
+  .header-inner { grid-template-columns: 1fr auto; min-height: 69px; }
+  .nav-toggle {
+    display: flex;
+    z-index: 3;
+    grid-column: 2;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--nav-rule);
+    background: transparent;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    color: var(--nav-ink);
+  }
+  .nav-toggle span { display: block; width: 20px; height: 1.5px; background: var(--nav-ink); }
+  .top-nav {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 24px;
+    right: 24px;
+    grid-column: auto;
+    background: var(--nav-bg);
+    border: 1px solid var(--nav-rule);
+    padding: 14px 25px;
+    box-shadow: 0 17px 35px #0002;
+    z-index: 2;
+  }
+  .top-nav.is-open { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .top-nav a { padding: 14px 0; border-bottom: 1px solid var(--nav-fine-rule); }
+  .top-nav a.active { border-bottom-color: var(--nav-accent); }
+  .nav-divider { display: none; }
+}
+@media (max-width: 560px) {
+  .header-inner { padding-left: 18px; padding-right: 18px; }
+  .top-nav { left: 18px; right: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .top-nav a { transition: none; }
+}
