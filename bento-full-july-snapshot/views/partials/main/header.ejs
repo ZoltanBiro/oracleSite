@@ -1,0 +1,21 @@
+<% const currentPage = locals.page || ''; %>
+<div class="frame-corner tl" aria-hidden="true"></div>
+<div class="frame-corner tr" aria-hidden="true"></div>
+<div class="frame-corner bl" aria-hidden="true"></div>
+<div class="frame-corner br" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-brand" href="/" aria-label="Zoltan Biro home">ZB.DEV</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="top-nav" id="site-navigation" aria-label="Main navigation">
+      <a href="/" class="<%= currentPage === 'home' ? 'active' : '' %>" <%- currentPage === 'home' ? 'aria-current="page"' : '' %>><span class="nav-num">01.</span> Home</a>
+      <a href="/about" class="<%= currentPage === 'about' ? 'active' : '' %>" <%- currentPage === 'about' ? 'aria-current="page"' : '' %>><span class="nav-num">02.</span> About</a>
+      <a href="/projects" class="<%= currentPage === 'projects' ? 'active' : '' %>" <%- currentPage === 'projects' ? 'aria-current="page"' : '' %>><span class="nav-num">03.</span> Projects</a>
+      <a href="/blog" class="<%= currentPage === 'blog' ? 'active' : '' %>" <%- currentPage === 'blog' ? 'aria-current="page"' : '' %>><span class="nav-num">04.</span> Blog</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a class="nav-lab" href="/labs"><span class="nav-num">05.</span> Labs <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>

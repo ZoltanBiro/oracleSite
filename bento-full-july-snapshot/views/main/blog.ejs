@@ -1,0 +1,18 @@
+<section class="page-intro">
+  <p class="eyebrow">[ 03 ] / THE OCCASIONAL NOTE</p>
+  <h1>Words, sometimes.</h1>
+  <p>Mostly whatever happens to be taking up space in my head. Sometimes software, sometimes hockey. No posting schedule.</p>
+</section>
+<section class="index-section" aria-label="Blog entries">
+  <div class="section-heading"><span>The archive</span><span><%= posts.length %> entries</span></div>
+  <div class="posts-stack">
+    <% posts.forEach(function(post, index) { %>
+      <article class="content-card focus-frame post-card" id="post-<%= index + 1 %>">
+        <div class="card-meta"><span><%= post.date %></span><span>NOTE <%= String(index + 1).padStart(2, '0') %></span></div>
+        <h2><%= post.title %></h2>
+        <div class="tags"><% (post.tags || []).forEach(function(tag) { %><span class="tag"><%= tag %></span><% }); %></div>
+        <div class="post-body"><% (post.body || []).forEach(function(paragraph) { %><p><%= paragraph %></p><% }); %></div>
+      </article>
+    <% }); %>
+  </div>
+</section>

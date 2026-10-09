@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F2F0EB">
+  <meta name="description" content="<%= locals.pageDescription || 'The personal website of Zoltan Biro.' %>">
+  <title><%= locals.pageTitle && locals.pageTitle !== 'Home' ? locals.pageTitle + ' — Zoltan Biro' : 'Zoltan Biro — Personal Site' %></title>
+  <link rel="icon" href="/assets/main/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/main/css/style.css">
+  <script defer src="/assets/main/js/main.js"></script>
+</head>
+<body class="site-body page-<%= locals.page || 'other' %>">
+  <a class="skip-link" href="#content">Skip to content</a>
+  <%- include('../partials/main/header') %>
+  <main class="page-content" id="content">
+    <%- body %>
+  </main>
+  <%- include('../partials/main/footer') %>
+</body>
+</html>
