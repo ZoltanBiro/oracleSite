@@ -1,19 +1,130 @@
-<section class="labs-intro">
-  <h1>Labs</h1>
-  <p>
-    A sandbox of small, low-traffic apps I've built to stay sharp technically —
-    learning new tech, scratching personal itches, or just practicing fullstack work.
-    These are experiments, not portfolio pieces: expect some to be unpolished or
-    weirdly specific.
-  </p>
+<%
+  // Keep this view compatible with the existing routes/labs.js `apps` array.
+  // `example-app` in the original July repo was an unmounted placeholder.
+  const catalog = (Array.isArray(locals.apps) ? locals.apps : []).filter(function (app) {
+    if (!app || !app.name && !app.title) return false;
+    const slug = String(app.slug || '').toLowerCase();
+    const name = String(app.name || app.title || '').toLowerCase();
+    return slug !== 'example-app' && slug !== 'nzt' && slug !== 'new-zork-times' && name !== 'new zork times' && app.placeholder !== true;
+  });
+  const displayStatus = function (status) {
+    const s = String(status || 'building').toLowerCase();
+    if (['live', 'active', 'released', 'published'].includes(s)) return 'live';
+    if (['archived', 'retired', 'inactive'].includes(s)) return 'archived';
+    if (['planned', 'idea', 'upcoming'].includes(s)) return 'planned';
+    return 'building';
+  };
+  const appHref = function (app) {
+    if (app.href || app.url || app.path) return app.href || app.url || app.path;
+    // An in-progress entry does not imply that its route has been mounted.
+    if (displayStatus(app.status) === 'live' && app.slug) return '/labs/' + encodeURIComponent(app.slug);
+    return '';
+  };
+%>
+
+<section class="labs-hero" aria-labelledby="workshop-title">
+  <div class="labs-hero__copy">
+    <p class="labs-eyebrow">// LABS <span class="labs-eyebrow__ticks" aria-hidden="true">• •</span></p>
+    <h1 id="workshop-title">The Workshop</h1>
+    <p class="labs-hero__lead">Small tools, experiments, and ongoing projects. A different side of the build.</p>
+    <span class="labs-accent-rule" aria-hidden="true"></span>
+    <p class="labs-hero__description">A collection of playgrounds for learning, trying new ideas, and solving oddly specific problems.</p>
+    <a class="labs-button" href="#all-labs">EXPLORE ALL APPS <span aria-hidden="true">↘</span></a>
+  </div>
+  <figure class="labs-hero__visual labs-brackets" aria-label="A warm, sunlit workspace">
+    <img src="/assets/labs/images/workshop-hero.webp" alt="A laptop, camera, and notebook on a sunlit workshop desk" width="1200" height="664" fetchpriority="high">
+    <figcaption><span>// LABS ENVIRONMENT</span><span>v1.0</span></figcaption>
+    <span class="labs-hero__counter" aria-hidden="true">01 / 01</span>
+  </figure>
 </section>
 
-<section class="labs-list">
-  <% apps.forEach(function(app) { %>
-    <article class="labs-card">
-      <h2><a href="/labs/<%= app.slug %>"><%= app.name %></a></h2>
-      <p><%= app.blurb %></p>
-      <span class="labs-card__status labs-card__status--<%= app.status %>"><%= app.status %></span>
-    </article>
-  <% }); %>
+<section class="labs-showcase" id="featured" aria-label="Featured project and lab index">
+  <article class="labs-feature labs-brackets">
+    <div class="labs-feature__copy">
+      <p class="labs-kicker">FEATURED PROJECT</p>
+      <h2>New Zork Times</h2>
+      <p class="labs-feature__intro">A newspaper generated from a fictional world. Real game data, fake news, questionable journalism.</p>
+      <div class="labs-tags"><span>#ZORK</span><span>#WRITING</span><span>#GAMING</span></div>
+    </div>
+    <a class="labs-feature__cover" href="/nzt" aria-label="Open the New Zork Times">
+      <img src="/assets/labs/images/nzt-cover.webp" alt="The New Zork Times title and a monochrome fantasy city scene" width="522" height="423" loading="lazy">
+    </a>
+    <div class="labs-feature__action">
+      <p class="labs-status labs-status--live"><span class="labs-status__dot" aria-hidden="true"></span>LIVE</p>
+      <p>The definitive source for news, analysis, and completely fabricated headlines from New Zork.</p>
+      <a class="labs-button labs-button--outline" href="/nzt">LAUNCH APP <span aria-hidden="true">↗</span></a>
+    </div>
+  </article>
+
+  <aside class="labs-index" aria-label="Labs index">
+    <div class="labs-index__heading"><h2>LABS INDEX</h2><a href="#all-labs">View all <span aria-hidden="true">→</span></a></div>
+    <ol class="labs-index__list">
+      <li>
+        <a href="/nzt"><span class="labs-index__number">01</span><span class="labs-index__name">New Zork Times</span><span class="labs-status labs-status--live">LIVE</span></a>
+      </li>
+      <% catalog.forEach(function (app, i) { const status = displayStatus(app.status); const href = appHref(app); %>
+        <li>
+          <% if (href) { %><a href="<%= href %>"><% } else { %><div class="labs-index__static"><% } %>
+            <span class="labs-index__number"><%= String(i + 2).padStart(2, '0') %></span>
+            <span class="labs-index__name"><%= app.name || app.title %></span>
+            <span class="labs-status labs-status--<%= status %>"><%= status.toUpperCase() %></span>
+          <% if (href) { %></a><% } else { %></div><% } %>
+        </li>
+      <% }); %>
+      <% if (!catalog.length) { %>
+        <li><div class="labs-index__static labs-index__muted"><span class="labs-index__number">02</span><span class="labs-index__name">Next experiment</span><span>OPEN SLOT</span></div></li>
+        <li><div class="labs-index__static labs-index__muted"><span class="labs-index__number">03</span><span class="labs-index__name">To be determined</span><span>OPEN SLOT</span></div></li>
+      <% } %>
+    </ol>
+  </aside>
+</section>
+
+<section class="labs-archive" id="all-labs" aria-labelledby="labs-archive-title">
+  <div class="labs-archive__heading">
+    <h2 id="labs-archive-title">[ ALL LABS ]</h2>
+    <span><%= String(catalog.length + 1).padStart(2,'0') %> EXPERIMENT<%= catalog.length === 0 ? '' : 'S' %> LOGGED</span>
+  </div>
+  <% if (catalog.length) { %>
+    <div class="labs-cards">
+      <% catalog.forEach(function (app, i) { const status = displayStatus(app.status); const href = appHref(app); %>
+        <article class="labs-app-card labs-brackets">
+          <div class="labs-app-card__top">
+            <span><%= String(i + 2).padStart(2, '0') %></span>
+            <span class="labs-status labs-status--<%= status %>"><span class="labs-status__dot" aria-hidden="true"></span><%= status.toUpperCase() %></span>
+          </div>
+          <div class="labs-app-card__body">
+            <span class="labs-app-card__symbol" aria-hidden="true">/ &gt;_</span>
+            <div>
+              <h3><%= app.name || app.title %></h3>
+              <p><%= app.blurb || app.summary || app.description || 'An experiment from the workshop.' %></p>
+            </div>
+          </div>
+          <% if (Array.isArray(app.tags) && app.tags.length) { %>
+            <div class="labs-tags"><% app.tags.forEach(function (tag) { %><span>#<%= String(tag).replace(/^#/, '').toUpperCase() %></span><% }); %></div>
+          <% } %>
+          <div class="labs-app-card__bottom">
+            <% if (href) { %><a href="<%= href %>">OPEN EXPERIMENT <span aria-hidden="true">↗</span></a><% } else { %><span class="labs-app-card__unavailable">NOT YET AVAILABLE</span><% } %>
+          </div>
+        </article>
+      <% }); %>
+    </div>
+  <% } else { %>
+    <div class="labs-empty-grid">
+      <article class="labs-empty-card labs-brackets">
+        <span class="labs-kicker">02 / ON THE BENCH</span>
+        <div>
+          <h3>Room for the next strange idea.</h3>
+          <p>New Zork Times is the first entry. More little tools, prototypes, and experiments will appear here when there's something worth showing.</p>
+        </div>
+        <span class="labs-empty-card__footer">STATUS: ACCEPTING IDEAS <span aria-hidden="true">↗</span></span>
+      </article>
+      <aside class="labs-toolkit labs-brackets">
+        <span class="labs-kicker">CURRENT WORKBENCH</span>
+        <h3>Under the hood</h3>
+        <p>Built with familiar tools. New experiments can bring their own.</p>
+        <div class="labs-tags"><span>#NODE.JS</span><span>#EXPRESS</span><span>#EJS</span><span>#VANILLA_JS</span></div>
+        <span class="labs-toolkit__foot">ONE SITE. MANY SIDE QUESTS.</span>
+      </aside>
+    </div>
+  <% } %>
 </section>
