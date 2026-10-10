@@ -1,56 +1,111 @@
-// Single source of truth for project content — used by both the /projects
-// list page and the /project/:slug detail page, so they never drift apart.
-//
-// To add a project: add an object here with a unique `slug` (used in the
-// URL as /project/<slug>) and it'll show up on both pages automatically.
+// Selected work / editorial project index.
+// This module is used by both /projects and /project/:slug.
+// Entries with isConcept: true are fictional layout samples — NOT shipped projects.
+// Keep real project slugs stable so existing URLs continue working.
 
 module.exports = [
   {
     slug: 'personal-site',
     title: 'Self-Hosted Personal Site',
+    deck: 'A small corner of the internet, built and operated on a very small server.',
+    category: 'Infrastructure / Web',
+    year: '2026',
     status: 'Live',
-    summary:
-      "This site. A Node/Express app behind Nginx with Let's Encrypt TLS, deployed on an Oracle Cloud free-tier instance and kept alive with pm2. Includes a sandboxed Labs section for smaller experiments with session-based auth.",
-    tags: ['Node.js', 'Express', 'Nginx', 'MongoDB', 'pm2'],
+    type: 'case-study',
+    image: '/assets/main/images/hero-mountains.webp',
+    imageAlt: 'Mountain landscape used on the personal site homepage',
+    imageCaption: '01 / The site you are looking at',
+    summary: 'An Express and EJS site deployed behind Nginx on an Oracle Cloud VM. A home for selected work, personal writing, and the odd experiment.',
+    tags: ['Node.js', 'Express', 'EJS', 'Nginx', 'pm2'],
     body: [
-      "This site runs as a single Express app split into two logical sections — a static main site and a sandboxed Labs area — sitting behind Nginx, which terminates TLS and reverse-proxies everything to the app on port 8080.",
-      "The whole process is kept alive by pm2, running in fork mode with a memory ceiling, since it shares a 1 vCPU / 1GB RAM Oracle Cloud free-tier instance with MongoDB.",
-      "The trickiest part was getting session cookies to work correctly behind the reverse proxy — Express needed to be told to trust Nginx's forwarded headers before secure cookies (and therefore login on the Labs side) would work at all.",
+      'I wanted a place on the internet that was mine: somewhere to write, share selected work, and keep experimenting without squeezing everything into a generic portfolio template.',
+      'The implementation is deliberately modest. One Express application serves the personal pages and routes for experiments. EJS handles server-side views, while plain CSS and JavaScript keep the frontend easy to understand and maintain.',
+      'The site runs behind Nginx on an Oracle Cloud VM, with HTTPS terminated at the proxy and pm2 managing the Node process. Operating on a small instance makes simplicity and resource use actual design constraints rather than theoretical ones.',
+      'The ongoing lesson is that shipping a site is only half the work. Deployment, recovery, clear content boundaries, and small maintenance decisions are part of the project too.',
     ],
-    links: {
-      repo: 'https://github.com/YOUR-USERNAME/personal-site',
-      demo: 'https://zoltanbiro.ca',
-    },
+    sections: [
+      { heading: 'The idea', body: 'A personal website that feels like a personal website. It needed to be polished enough to show work, but loose enough to hold notes, strange ideas, and experiments.' },
+      { heading: 'The approach', body: 'An Express/EJS application with a main-site area and a visually separate Labs area. Static content stays in files; experiments can introduce persistence only when they need it.' },
+      { heading: 'The constraints', body: 'The original deployment targeted a very small Oracle Cloud instance. Nginx, pm2, and a deliberately simple runtime made the site practical to operate and troubleshoot.' },
+      { heading: 'What I learned', body: 'Simple architecture still involves interesting trade-offs. Reverse proxies, TLS, deployment, and consistent server-rendered layouts all become real problems when you are responsible for the complete application.' },
+    ],
+    links: { repo: 'https://github.com/ZoltanBiro/oracleSite', demo: 'https://zoltanbiro.ca' },
   },
   {
-    slug: 'project-two',
-    title: 'Project Two',
-    status: 'In Progress',
-    summary:
-      'One or two sentences on the problem this solved, then a sentence on what was learned building it.',
-    tags: ['Stack', 'Goes', 'Here'],
+    slug: 'new-zork-times',
+    title: 'New Zork Times',
+    deck: 'A newspaper from somewhere that does not quite exist.',
+    category: 'Publishing / Experiment',
+    year: '2026',
+    status: 'Live',
+    type: 'case-study',
+    image: '/assets/main/images/nzt-preview.webp',
+    imageAlt: 'Illustrated newspaper artwork from New Zork Times',
+    imageCaption: '02 / A fictional publication, presented like a real one',
+    summary: 'A JSON-driven newspaper project that turns separately authored articles and issues into a browsable publication.',
+    tags: ['Express', 'EJS', 'JSON', 'Editorial design'],
     body: [
-      'TODO: replace this with a real write-up — what problem the project solves, why you built it, and how it works under the hood.',
-      'A good structure is usually: the problem, the approach, one interesting technical decision, and what you\'d do differently next time.',
+      'New Zork Times started with a simple question: what would a newspaper for New Zork look and feel like if you treated it as a real publication?',
+      'The content model separates individual articles from issues. Each article is authored as JSON, and issue files collect articles together for publication. The server renders those records with EJS templates instead of generating pages from PDFs.',
+      'That separation makes the project easier to write for and iterate on. Layouts can change without rewriting articles, and new issues can be assembled from existing content.',
+      'The experiment sits alongside the rest of the site, but it has its own personality. The fun is in treating an imaginary world with an entirely straight-faced editorial design.',
     ],
-    links: {
-      repo: '',
-      demo: '',
-    },
+    sections: [
+      { heading: 'The premise', body: 'Build a fictional newspaper that feels like a publication, rather than a collection of joke posts. The publication is its own little world inside the site.' },
+      { heading: 'Content first', body: 'Articles and issues are stored separately as JSON. That keeps the writing portable and lets EJS control the presentation without forcing a PDF-based workflow.' },
+      { heading: 'The design problem', body: 'A newspaper has to balance hierarchy and density. Headlines, sections, issue context, and individual articles need to feel connected while remaining easy to navigate on the web.' },
+      { heading: 'Where it can go', body: 'More issues, more recurring sections, and increasingly elaborate fictional reportage — without changing the underlying idea of structured content feeding reusable templates.' },
+    ],
+    links: { repo: '', demo: '/nzt' },
   },
   {
-    slug: 'project-three',
-    title: 'Project Three',
-    status: 'Archived',
-    summary: 'Same shape: what it does, what it\'s built with, what you\'d learn from reading the code.',
-    tags: ['Stack', 'Goes', 'Here'],
+    slug: 'signal-garden',
+    title: 'Signal Garden',
+    deck: 'Make room for the tiny patterns hidden in an ordinary day.',
+    category: 'Data / Visualization',
+    year: 'Concept',
+    status: 'Sample concept',
+    type: 'concept',
+    isConcept: true,
+    coverTheme: 'sage',
+    coverNumber: '03',
+    summary: 'A speculative personal-data journal that would turn small daily observations into quiet, readable visual patterns.',
+    tags: ['Concept', 'Data visualization', 'UI exploration'],
     body: [
-      'TODO: replace this with a real write-up.',
+      'This is a fictional project created to test the portfolio layout. It has not been built.',
+      'The idea would be a tiny journal of daily observations — weather, reading, places visited, or whatever else feels worth remembering — with gentle visual summaries instead of overwhelming dashboards.',
+      'A possible design challenge would be keeping the interactions deliberately small: one entry at a time, simple trends, and enough room to notice patterns without pretending every detail needs to be optimized.',
     ],
-    links: {
-      repo: '',
-      demo: '',
-    },
+    sections: [
+      { heading: 'The hypothetical idea', body: 'A personal observations journal that collects lightweight entries and slowly reveals patterns over weeks and months.' },
+      { heading: 'Potential interaction', body: 'Quick daily logging, an evolving visual calendar, and small summaries that prioritize curiosity over productivity metrics.' },
+      { heading: 'What would need exploring', body: 'How much detail can a visualization show before it stops feeling calm? Where should data live? What should remain private?' },
+    ],
+    links: { repo: '', demo: '' },
+  },
+  {
+    slug: 'margins',
+    title: 'Margins',
+    deck: 'An intentionally small place for half-finished thoughts.',
+    category: 'Writing / Tools',
+    year: 'Concept',
+    status: 'Sample concept',
+    type: 'concept',
+    isConcept: true,
+    coverTheme: 'clay',
+    coverNumber: '04',
+    summary: 'A fictional reading and annotation workspace for collecting passages, questions, and notes without building a second brain.',
+    tags: ['Concept', 'Writing', 'Interaction design'],
+    body: [
+      'This is a fictional project created to test the portfolio layout. It has not been built.',
+      'Margins imagines an uncluttered home for small reading notes. Rather than turning highlights into a complicated organizational system, the interface would encourage saving a passage and writing one thought beside it.',
+      'The interesting challenge would be creating a workflow that remains useful after months of irregular use, with good typography, easy retrieval, and little administrative overhead.',
+    ],
+    sections: [
+      { heading: 'The hypothetical idea', body: 'A collection of annotated reading fragments, designed to stay out of the way of actual reading and writing.' },
+      { heading: 'Potential interaction', body: 'Capture a quotation, add a note, assign a light category, and browse an archive that still feels comfortable to read.' },
+      { heading: 'What would need exploring', body: 'Exportability, long-term organization, and whether a deliberately simple interface is better than a feature-rich notes app.' },
+    ],
+    links: { repo: '', demo: '' },
   },
 ];
-
