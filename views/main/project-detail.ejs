@@ -1,21 +1,52 @@
-<section class="page-intro detail-intro">
-  <a class="back-link" href="/projects">← All projects</a>
-  <p class="eyebrow">PROJECT REPORT / <%= project.status %></p>
-  <h1><%= project.title %></h1>
-  <p><%= project.summary %></p>
-</section>
-<div class="detail-grid">
-  <aside class="content-card focus-frame detail-aside">
-    <span class="small-label">PROJECT DETAILS</span>
-    <p class="aside-label">Status</p><p class="aside-value"><%= project.status %></p>
-    <p class="aside-label">Technologies</p>
-    <div class="tags"><% (project.tags || []).forEach(function(tag) { %><span class="tag"><%= tag %></span><% }); %></div>
-    <% if (project.links && project.links.demo) { %><a class="text-cta" href="<%= project.links.demo %>" target="_blank" rel="noopener noreferrer">Live demo ↗</a><% } %>
-    <% if (project.links && project.links.repo && !project.links.repo.includes('YOUR-USERNAME')) { %><a class="text-cta" href="<%= project.links.repo %>" target="_blank" rel="noopener noreferrer">Repository ↗</a><% } %>
-  </aside>
-  <article class="content-card focus-frame prose-card">
-    <span class="small-label">THE WRITE-UP</span>
-    <% (project.body || []).forEach(function(paragraph) { %><p><%= paragraph %></p><% }); %>
-  </article>
-</div>
-<div class="end-link"><a href="/projects">← Back to projects</a></div>
+<% const isSample = Boolean(project.isConcept); %>
+<article class="ed-detail">
+  <nav class="ed-detail-breadcrumb" aria-label="Breadcrumb"><a href="/projects">← Selected work</a><span>/</span><span><%= project.category || 'Project' %></span></nav>
+
+  <header class="ed-detail-heading">
+    <div class="ed-detail-meta"><span><%= isSample ? 'SAMPLE CONCEPT / NOT BUILT' : 'PROJECT REPORT / ' + (project.status || 'CASE STUDY') %></span><span><%= project.year || '' %></span></div>
+    <h1><%= project.title %></h1>
+    <p class="ed-detail-deck"><%= project.deck || project.summary %></p>
+    <% if (isSample) { %><p class="ed-concept-disclosure"><strong>Concept preview.</strong> This project is fictional and included to demonstrate the portfolio layout. It has not been built.</p><% } %>
+  </header>
+
+  <figure class="ed-detail-hero <%= project.image ? 'ed-detail-hero-image' : 'ed-detail-hero-type ed-swatch-' + (project.coverTheme || 'neutral') %>">
+    <% if (project.image) { %>
+      <img src="<%= project.image %>" alt="<%= project.imageAlt || '' %>" loading="eager">
+    <% } else { %>
+      <span class="ed-detail-type-word" aria-hidden="true"><%= project.title %></span>
+    <% } %>
+    <figcaption><span><%= project.imageCaption || (isSample ? 'SPECULATIVE PROJECT / CONCEPT ART' : 'PROJECT IMAGE') %></span><span><%= project.year || '' %></span></figcaption>
+  </figure>
+
+  <div class="ed-detail-body">
+    <aside class="ed-detail-side" aria-label="Project information">
+      <p class="ed-side-title">THE PARTICULARS</p>
+      <dl>
+        <dt>Category</dt><dd><%= project.category || 'Selected work' %></dd>
+        <dt>Status</dt><dd><%= isSample ? 'Concept — not built' : (project.status || 'Project') %></dd>
+        <dt>Year</dt><dd><%= project.year || '—' %></dd>
+        <dt>Stack / themes</dt><dd><% if (project.tags && project.tags.length) { %><span class="ed-tag-list"><% project.tags.forEach(function(tag){ %><span><%= tag %></span><% }); %></span><% } else { %>—<% } %></dd>
+      </dl>
+      <% if (!isSample && project.links && (project.links.demo || (project.links.repo && !project.links.repo.includes('YOUR-USERNAME')))) { %>
+        <div class="ed-side-links">
+          <% if (project.links.demo) { %><a href="<%= project.links.demo %>" <% if (/^https?:\/\//.test(project.links.demo)) { %>target="_blank" rel="noopener noreferrer"<% } %>>Visit live project ↗</a><% } %>
+          <% if (project.links.repo && !project.links.repo.includes('YOUR-USERNAME')) { %><a href="<%= project.links.repo %>" target="_blank" rel="noopener noreferrer">View source ↗</a><% } %>
+        </div>
+      <% } %>
+    </aside>
+    <div class="ed-detail-prose">
+      <p class="ed-article-kicker"><%= isSample ? 'AN IDEA, NOT A CLAIM' : 'THE STORY BEHIND THE BUILD' %></p>
+      <p class="ed-detail-lede"><%= project.summary %></p>
+      <% if (project.sections && project.sections.length) { %>
+        <% project.sections.forEach(function(section, index) { %>
+          <section class="ed-article-section"><p class="ed-article-index"><%= String(index + 1).padStart(2, '0') %> / <%= isSample ? 'CONCEPT NOTE' : 'CASE NOTE' %></p><h2><%= section.heading %></h2><p><%= section.body %></p></section>
+        <% }); %>
+      <% } else { %>
+        <% (project.body || []).forEach(function(paragraph, index) { %>
+          <section class="ed-article-section"><p class="ed-article-index"><%= String(index + 1).padStart(2, '0') %> / NOTE</p><p><%= paragraph %></p></section>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+</article>
+<nav class="ed-detail-end" aria-label="After this project"><a href="/projects"><span>KEEP READING</span>← All selected work</a><a href="/labs"><span>OR GO EXPLORE</span>Enter Labs ↗</a></nav>

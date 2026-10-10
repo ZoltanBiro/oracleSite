@@ -12,6 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/main/css/style.css">
   <link rel="stylesheet" href="/assets/main/css/shared-header.css">
+  <% if (locals.page === 'projects') { %>
+  <link rel="stylesheet" href="/assets/main/css/projects-editorial.css">
+  <% } %>
   <script defer src="/assets/main/js/main.js"></script>
 </head>
 <body class="site-body page-<%= locals.page || 'other' %>">

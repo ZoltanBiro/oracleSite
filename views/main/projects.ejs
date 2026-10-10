@@ -1,18 +1,77 @@
-<section class="page-intro">
-  <p class="eyebrow">[ 02 ] / SELECTED WORK</p>
-  <h1>Things I've <em>built.</em></h1>
-  <p>Some projects are worth a proper write-up. The smaller, stranger experiments usually end up over in <a href="/labs">Labs</a>.</p>
+<%
+  const entries = Array.isArray(locals.projects) ? locals.projects : [];
+  const caseStudies = entries.filter((item) => !item.isConcept);
+  const concepts = entries.filter((item) => item.isConcept);
+  const lead = caseStudies[0];
+  const rest = caseStudies.slice(1);
+%>
+<section class="ed-intro" aria-labelledby="projects-title">
+  <div class="ed-intro-top">
+    <p class="ed-kicker">[ 02 ] &nbsp; / &nbsp; THE PORTFOLIO</p>
+    <p class="ed-intro-count"><%= String(caseStudies.length).padStart(2, '0') %> projects &nbsp; / &nbsp; <%= String(concepts.length).padStart(2, '0') %> concepts</p>
+  </div>
+  <div class="ed-intro-grid">
+    <h1 id="projects-title">Selected<br><em>work.</em></h1>
+    <div class="ed-intro-note">
+      <span class="ed-hairline"></span>
+      <p>Some things are worth explaining, not just linking to. A collection of builds, decisions, constraints, and the occasional experiment.</p>
+      <span class="ed-direction">SCROLL TO READ <span aria-hidden="true">↓</span></span>
+    </div>
+  </div>
 </section>
-<section class="index-section" aria-label="Projects">
-  <div class="section-heading"><span>Project index</span><span><%= projects.length %> entries</span></div>
-  <div class="project-grid">
-    <% projects.forEach(function(project, index) { %>
-      <a class="content-card focus-frame project-card" href="/project/<%= encodeURIComponent(project.slug) %>">
-        <div class="card-meta"><span>[ <%= String(index + 1).padStart(2, '0') %> ]</span><span><%= project.status %></span></div>
-        <h2><%= project.title %></h2>
-        <p><%= project.summary %></p>
-        <div class="card-bottom"><div class="tags"><% (project.tags || []).forEach(function(tag){ %><span class="tag"><%= tag %></span><% }); %></div><span aria-hidden="true" class="card-arrow">↗</span></div>
+
+<section class="ed-stories" aria-labelledby="ed-featured-title">
+  <div class="ed-section-rule"><h2 id="ed-featured-title">Featured case studies</h2><span>01 — <%= String(caseStudies.length).padStart(2, '0') %></span></div>
+  <% if (!caseStudies.length) { %>
+    <p class="ed-empty">The next case study is still being written. In the meantime, there are experiments to explore in <a href="/labs">Labs</a>.</p>
+  <% } %>
+  <% if (lead) { %>
+    <article class="ed-lead-story">
+      <a class="ed-story-media ed-story-media-lead" href="/project/<%= encodeURIComponent(lead.slug) %>" aria-label="Read <%= lead.title %>">
+        <% if (lead.image) { %>
+          <img src="<%= lead.image %>" alt="<%= lead.imageAlt || '' %>" loading="eager">
+        <% } else { %>
+          <span class="ed-cover-type" aria-hidden="true"><%= lead.title %></span>
+        <% } %>
+        <span class="ed-media-note"><%= lead.imageCaption || 'PROJECT / 01' %></span>
       </a>
+      <div class="ed-story-copy">
+        <div class="ed-story-topline"><span>01 / <%= lead.category || 'Selected work' %></span><span><%= lead.year || '' %></span></div>
+        <h3><a href="/project/<%= encodeURIComponent(lead.slug) %>"><%= lead.title %></a></h3>
+        <p class="ed-story-deck"><%= lead.deck || lead.summary %></p>
+        <p class="ed-story-summary"><%= lead.summary %></p>
+        <div class="ed-story-foot"><a href="/project/<%= encodeURIComponent(lead.slug) %>" class="ed-text-link">Read the case study <span aria-hidden="true">↗</span></a><span class="ed-foot-status"><%= lead.status || '' %></span></div>
+      </div>
+    </article>
+  <% } %>
+  <% rest.forEach(function(project, index) { %>
+    <article class="ed-editorial-row">
+      <div class="ed-row-num"><%= String(index + 2).padStart(2, '0') %><span> / CASE STUDY</span></div>
+      <div class="ed-row-main"><div class="ed-row-meta"><span><%= project.category || 'Selected work' %></span><span><%= project.year || '' %></span></div><h3><a href="/project/<%= encodeURIComponent(project.slug) %>"><%= project.title %></a></h3><p><%= project.deck || project.summary %></p><a href="/project/<%= encodeURIComponent(project.slug) %>" class="ed-text-link">Explore the story <span aria-hidden="true">↗</span></a></div>
+      <a class="ed-row-visual" href="/project/<%= encodeURIComponent(project.slug) %>" aria-label="Read <%= project.title %>">
+        <% if (project.image) { %><img src="<%= project.image %>" alt="<%= project.imageAlt || '' %>" loading="lazy"><% } else { %><span class="ed-row-visual-label">PROJECT / <%= String(index + 2).padStart(2, '0') %></span><% } %>
+      </a>
+    </article>
+  <% }); %>
+</section>
+
+<% if (concepts.length) { %>
+<section class="ed-concepts" aria-labelledby="ed-concepts-title">
+  <div class="ed-concepts-head">
+    <div><p class="ed-kicker">FUTURE / MAYBE</p><h2 id="ed-concepts-title">From the <em>notebook.</em></h2></div>
+    <p>Speculative ideas included to explore the layout. <strong>These are fictional samples, not completed projects.</strong></p>
+  </div>
+  <div class="ed-concept-list">
+    <% concepts.forEach(function(project, index) { %>
+      <article class="ed-concept-row">
+        <a href="/project/<%= encodeURIComponent(project.slug) %>" class="ed-concept-swatch ed-swatch-<%= project.coverTheme || 'neutral' %>" aria-label="Read sample concept <%= project.title %>"><span class="ed-concept-swatch-num"><%= project.coverNumber || String(index + 1).padStart(2, '0') %></span><span class="ed-concept-swatch-word"><%= project.title %></span></a>
+        <div class="ed-concept-info"><span class="ed-sample-label">SAMPLE CONCEPT / NOT BUILT</span><div class="ed-concept-heading"><h3><a href="/project/<%= encodeURIComponent(project.slug) %>"><%= project.title %></a></h3><span aria-hidden="true">↗</span></div><p><%= project.deck || project.summary %></p><span class="ed-concept-category"><%= project.category || 'Exploration' %></span></div>
+      </article>
     <% }); %>
   </div>
+</section>
+<% } %>
+
+<section class="ed-outro" aria-label="More experiments">
+  <p>Not everything needs a case study.</p><a href="/labs">The smaller experiments live in Labs <span aria-hidden="true">↗</span></a>
 </section>
